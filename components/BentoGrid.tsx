@@ -80,7 +80,7 @@ const CARD_DATA: Record<Variant, any> = {
   instagram: {
     icon: "📸",
     name: "Instagram",
-    handle: "@mintflake",
+    handle: "mintflake.id",
     posts: "476 Posts",
     buttonText: "Follow",
     color: "from-purple-600 to-pink-500",

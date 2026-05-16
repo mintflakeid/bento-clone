@@ -47,12 +47,20 @@ export default function SocialCard({ variant, mode, data, images = [] }: Props) 
         .map((r: any) => `https://github-readme-stats.vercel.app/api?username=${data.handle}&theme=default&show_icons=true`)
       newMetaText = `${socialData.repos.length} repos`
     } else if (variant === 'instagram' && socialData.posts) {
-      // Get Instagram post thumbnails
+      // Get Instagram post URLs
       newImages = socialData.posts
         .filter((p: any) => p.media_url)
         .map((p: any) => p.media_url)
         .slice(0, 6)
-      newMetaText = `${socialData.posts.length} posts`
+      
+      // If no posts but we have profile data, show profile picture
+      if (newImages.length === 0 && socialData.profile?.profile_picture_url) {
+        newImages = [socialData.profile.profile_picture_url]
+      }
+      
+      newMetaText = socialData.profile?.followers_count
+        ? `${socialData.profile.followers_count} followers`
+        : 'Follow'
     } else if (variant === 'youtube' && socialData.videos) {
       // Get YouTube video thumbnails
       newImages = socialData.videos
